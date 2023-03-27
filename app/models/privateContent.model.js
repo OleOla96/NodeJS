@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const PivateContent = sequelize.define("private_contents", {
-      name: {
+      description: {
         type: Sequelize.STRING
       },
       linkImage: {

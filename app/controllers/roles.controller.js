@@ -11,17 +11,25 @@ exports.allAccess = (req, res) => {
   )
 }
 
-exports.userBoard = (req, res) => {
+exports.userBoard = (req, res, next) => {
   PrivateContent.findAll()
     .then(data => {
       res.status(200).send({data})
     }
-  )
+  ).catch(next)
+}
+
+exports.showContent = (req, res, next) => {
+  PrivateContent.findOne({where: { id: req.params.id }})
+    .then(data => {
+      res.status(200).send({data})
+    }
+  ).catch(next)
 }
 
 exports.creatContent = (req, res) => {
   PrivateContent.create({
-    name: req.body.description,
+    description: req.body.description,
     linkImage: req.body.linkImage,
     linkVideo: req.body.linkVideo,
     userId: req.body.userId

@@ -20,6 +20,12 @@ route.get(
 )
 
 route.get(
+  "/user/:id",
+  [authJwt.verifyToken],
+  rolesController.showContent
+)
+
+route.get(
   "/mod",
   [authJwt.verifyToken, authJwt.isModerator],
   rolesController.moderatorBoard
