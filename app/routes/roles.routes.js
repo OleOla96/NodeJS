@@ -14,13 +14,13 @@ route.use(function(req, res, next) {
 route.post("/crud/create", [authJwt.verifyToken], rolesController.creatContent)
 
 route.get(
-  "/user",
+  "/:userId",
   [authJwt.verifyToken],
   rolesController.userBoard
 )
 
 route.get(
-  "/user/:id",
+  "/:userId/:id",
   [authJwt.verifyToken],
   rolesController.showContent
 )

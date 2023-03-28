@@ -2,6 +2,7 @@
 const db = require("../models")
 const PublicContent = db.publicContent
 const PrivateContent = db.privateContent
+const Op = db.Sequelize.Op
 
 exports.allAccess = (req, res) => {
   PublicContent.findAll()
@@ -12,15 +13,17 @@ exports.allAccess = (req, res) => {
 }
 
 exports.userBoard = (req, res, next) => {
-  PrivateContent.findAll()
+  PrivateContent.findAll(
+    {where: {userId:  req.params.userId}})
     .then(data => {
-      res.status(200).send({data})
+      res.status(200).send(data)
     }
   ).catch(next)
 }
 
 exports.showContent = (req, res, next) => {
-  PrivateContent.findOne({where: { id: req.params.id }})
+  PrivateContent.findOne(
+    {where: {id: req.params.id}})
     .then(data => {
       res.status(200).send({data})
     }
