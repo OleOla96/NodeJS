@@ -26,29 +26,25 @@ db.sequelize = sequelize;
 
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.role = require("./role.model.js")(sequelize, Sequelize);
-db.privateContent = require("./privateContent.model.js")(sequelize, Sequelize);
-db.publicContent = require("./publicContent.model.js")(sequelize, Sequelize);
+db.contents = require("./content.model.js")(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
   foreignKey: "roleId",
   otherKey: "userId"
 });
+
 db.user.belongsToMany(db.role, {
   through: "user_roles",
   foreignKey: "userId",
   otherKey: "roleId"
 });
 
-db.user.hasMany(db.publicContent);
-db.publicContent.belongsTo(db.user, {
+db.user.hasMany(db.contents);
+db.contents.belongsTo(db.user, {
   foreignKey: "userId"
 });
 
-db.user.hasMany(db.privateContent);
-db.privateContent.belongsTo(db.user, {
-  foreignKey: "userId"
-});
 
 db.ROLES = ["user", "admin", "moderator"];
 

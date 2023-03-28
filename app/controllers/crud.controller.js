@@ -1,15 +1,15 @@
-const { where } = require("sequelize")
 const db = require("../models")
-const Op = db.sequelize.Op
-const PublicContent = db.publicContent
+const Contents = db.contents
 
 class CrudController {
   create(req, res) {
-    PublicContent.create({
+    Contents.create({
+      userId: req.body.userId,
+      title: req.body.title,
       description: req.body.description,
       linkImage: req.body.linkImage,
       linkVideo: req.body.linkVideo,
-      userId: req.body.userId
+      published: req.body.stateContent
     })
       .then(res.send({ message: "Content has been created successfully!"}))
       .catch(err => {
@@ -20,7 +20,7 @@ class CrudController {
   mycontents(req, res, next) {
     const userId = req.params.userId
 
-    PublicContent.findAll({
+    Contents.findAll({
       where: {userId: userId}
     })
     .then(data => {
@@ -32,14 +32,14 @@ class CrudController {
   update(req, res) {
     const getId = req.params.id
     const data = {
-      id: req.params.id,
+      title: req.body.title,
       description: req.body.description,
       linkImage: req.body.linkImage,
       linkVideo: req.body.linkVideo,
-      userId: req.body.userId
+      published: req.body.stateContent
     }
     
-    PublicContent.update( data, {where : { id: getId }})
+    Contents.update( data, {where : { id: getId }})
     .then(res.send({ message: "Content was updated successfully." }))
     .catch(() => {
       res.status(500).send({
@@ -50,7 +50,7 @@ class CrudController {
 
   delete(req, res) {
     const getId = req.params.id
-    PublicContent.destroy({where: { id: getId }})
+    Contents.destroy({where: { id: getId }})
     .then(res.send({ message: "Content was deleted successfully." }))
     .catch(() => {
       res.status(500).send({
@@ -61,7 +61,7 @@ class CrudController {
   
   // deleteAll(req, res) {
   //   const getId = req.params.id
-  //   PublicContent.destroy({where: { id: getId }})
+  //   Contents.destroy({where: { id: getId }})
   //   .then(res.send({ message: "Content was deleted successfully." }))
   //   .catch(() => {
   //     res.status(500).send({

@@ -11,7 +11,6 @@ route.use(function(req, res, next) {
   next();
   })
 
-route.post("/crud/create", [authJwt.verifyToken], rolesController.creatContent)
 
 route.get(
   "/:userId",

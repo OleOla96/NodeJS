@@ -1,18 +1,20 @@
 const db = require('../models')
-const PublicContent = db.publicContent
+const Contents = db.contents
 
 exports.showAll = (req, res) => {
-  PublicContent.findAll()
+  Contents.findAll({where: { published: true }})
     .then(data => {
       res.status(200).send({
         data
       })
-    }
-  )
+    })
+  .catch(err => {
+    res.status(500).send({ message: err.message })
+  })
 }
 
 exports.showVideo = (req, res) => {
-  PublicContent.findOne({where: { id: req.params.id}})
+  Contents.findOne({where: { id: req.params.id, published: true }})
     .then(data => {
       res.status(200).send({
         data
