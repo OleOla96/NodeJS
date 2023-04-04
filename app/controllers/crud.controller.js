@@ -7,7 +7,6 @@ class CrudController {
       userId: req.body.userId,
       title: req.body.title,
       description: req.body.description,
-      linkImage: req.body.linkImage,
       linkVideo: req.body.linkVideo,
       published: req.body.stateContent
     })
@@ -34,7 +33,6 @@ class CrudController {
     const data = {
       title: req.body.title,
       description: req.body.description,
-      linkImage: req.body.linkImage,
       linkVideo: req.body.linkVideo,
       published: req.body.stateContent
     }
