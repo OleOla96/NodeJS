@@ -56,18 +56,6 @@ class CrudController {
       })
     })
   }
-  
-  // deleteAll(req, res) {
-  //   const getId = req.params.id
-  //   Contents.destroy({where: { id: getId }})
-  //   .then(res.send({ message: "Content was deleted successfully." }))
-  //   .catch(() => {
-  //     res.status(500).send({
-  //       message: "Error delete content with id=" + getId
-  //     })
-  //   })
-  // }
-
 }
 
 module.exports = new CrudController

@@ -1,17 +1,28 @@
 module.exports = (sequelize, Sequelize) => {
-  const contents = sequelize.define("contents", {
-    title: {
-      type: Sequelize.STRING
+  const contents = sequelize.define(
+    'contents',
+    {
+      title: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      linkVideo: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      published: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
     },
-    description: {
-      type: Sequelize.STRING
-    },
-    linkVideo: {
-      type: Sequelize.STRING
-    },
-    published: {
-      type: Sequelize.BOOLEAN
+    {
+      charset: 'utf8',
+      collate: 'utf8_unicode_ci',
     }
-  })
+  )
   return contents
 }
